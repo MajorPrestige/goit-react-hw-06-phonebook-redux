@@ -1,85 +1,84 @@
-import { useState, useEffect } from 'react';
-import { nanoid } from 'nanoid';
-import ContactsForm from './ContactsForm/ContactsForm';
+// import { useState, useEffect } from 'react';
+// import { nanoid } from 'nanoid';
+// import ContactsForm from './ContactsForm/ContactsForm';
 import ContactLists from './ContactsList/ContactList';
-import ContactsSearch from './ContactsSearch/ContactsSearch';
+// import ContactsSearch from './ContactsSearch/ContactsSearch';
 
 export const App = () => {
-  const [contacts, setContacts] = useState(
-    JSON.parse(localStorage.getItem('contacts')) ?? []
-  );
-  const [filter, setFilter] = useState('');
-  const [toDelete, setToDelete] = useState([]);
+  // const [contacts, setContacts] = useState(
+  //   JSON.parse(localStorage.getItem('contacts')) ?? []
+  // );
+  // const [filter, setFilter] = useState('');
+  // const [toDelete, setToDelete] = useState([]);
 
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+  // useEffect(() => {
+  //   localStorage.setItem('contacts', JSON.stringify(contacts));
+  // }, [contacts]);
 
-  const formSubmitHandler = (name, number) => {
-    const newContact = {
-      id: nanoid(),
-      name,
-      number,
-    };
+  // const formSubmitHandler = (name, number) => {
+  //   const newContact = {
+  //     id: nanoid(),
+  //     name,
+  //     number,
+  //   };
 
-    setContacts(contacts => {
-      const duplicateContact = contacts.find(
-        contact => contact.name === newContact.name
-      );
+  //   setContacts(contacts => {
+  //     const duplicateContact = contacts.find(
+  //       contact => contact.name === newContact.name
+  //     );
 
-      if (duplicateContact?.name === newContact.name) {
-        alert(`${newContact.name} is already in contacts`);
-        return [...contacts];
-      }
+  //     if (duplicateContact?.name === newContact.name) {
+  //       alert(`${newContact.name} is already in contacts`);
+  //       return [...contacts];
+  //     }
 
-      return [newContact, ...contacts];
-    });
-  };
+  //     return [newContact, ...contacts];
+  //   });
+  // };
 
-  const onCheckboxChange = e => {
-    const contactId = e.target.name;
-    if (toDelete.includes(contactId)) {
-      setToDelete(prevState => [...prevState].filter(el => el !== contactId));
-    } else {
-      setToDelete(prevState => [...prevState, e.target.name]);
-    }
-  };
+  // const onCheckboxChange = e => {
+  //   const contactId = e.target.name;
+  //   if (toDelete.includes(contactId)) {
+  //     setToDelete(prevState => [...prevState].filter(el => el !== contactId));
+  //   } else {
+  //     setToDelete(prevState => [...prevState, e.target.name]);
+  //   }
+  // };
 
-  const deleteContact = contactId => {
-    setContacts(prevState =>
-      prevState.filter(contact => contact.id !== contactId)
-    );
-  };
+  // const deleteContact = contactId => {
+  //   setContacts(prevState =>
+  //     prevState.filter(contact => contact.id !== contactId)
+  //   );
+  // };
 
-  const deleteAllContact = () => {
-    setToDelete([]);
-    setContacts(prevState =>
-      prevState.filter(contact => !toDelete.includes(contact.id))
-    );
-  };
+  // const deleteAllContact = () => {
+  //   setToDelete([]);
+  //   setContacts(prevState =>
+  //     prevState.filter(contact => !toDelete.includes(contact.id))
+  //   );
+  // };
 
-  const filterContact = ({ target }) => {
-    setFilter(target.value);
-  };
+  // const filterContact = ({ target }) => {
+  //   setFilter(target.value);
+  // };
 
-  const filterNormalized = filter.toLowerCase();
-  const filterContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filterNormalized)
-  );
-
+  // const filterNormalized = filter.toLowerCase();
+  // const filterContacts = contacts.filter(contact =>
+  //   contact.name.toLowerCase().includes(filterNormalized)
+  // );
   return (
     <>
       <div>
         <h2>Phonebook</h2>
-        <ContactsForm onSubmit={formSubmitHandler} />
+        {/* <ContactsForm onSubmit={formSubmitHandler} /> */}
         <h2>Contacts</h2>
-        <ContactsSearch value={filter} filter={filterContact} />
+        {/* <ContactsSearch value={filter} filter={filterContact} /> */}
         <ContactLists
-          contacts={filterContacts}
-          onDeleteClick={deleteContact}
-          onCheckboxChange={onCheckboxChange}
-          deleteAllContact={deleteAllContact}
-          contactsToDelete={toDelete}
+        // contacts={filterContacts}
+        // onDeleteClick={deleteContact}
+        // onCheckboxChange={onCheckboxChange}
+        // deleteAllContact={deleteAllContact}
+        // contactsToDelete={toDelete}
         />
       </div>
     </>
