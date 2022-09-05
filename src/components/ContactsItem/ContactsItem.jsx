@@ -10,17 +10,15 @@ const ContactsItem = ({
 }) => {
   return (
     <li className={s.item}>
-      <label className={s.item}>
-        <input
-          style={{ marginRight: '20px' }}
-          type="checkbox"
-          name={id}
-          onChange={onCheckboxChange}
-        />
-        <p>
-          {name}: {number}
-        </p>
-      </label>
+      <input
+        style={{ marginRight: '20px' }}
+        type="checkbox"
+        name={id}
+        onChange={onCheckboxChange}
+      />
+      <p>
+        {name}: {number}
+      </p>
       <button onClick={() => onDeleteClick(id)} type="button">
         Delete
       </button>

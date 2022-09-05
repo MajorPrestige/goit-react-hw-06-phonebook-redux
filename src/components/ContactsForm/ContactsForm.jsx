@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 import s from './ContactsForm.module.css';
@@ -7,8 +7,8 @@ function ContactsForm({ onSubmit }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const inputNameId = nanoid();
-  const inputNumberId = nanoid();
+  const inputNameId = useRef(nanoid());
+  const inputNumberId = useRef(nanoid());
 
   const onInputChange = ({ target }) => {
     switch (target.name) {

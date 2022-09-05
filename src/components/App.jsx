@@ -4,7 +4,7 @@ import ContactsForm from './ContactsForm/ContactsForm';
 import ContactLists from './ContactsList/ContactList';
 import ContactsSearch from './ContactsSearch/ContactsSearch';
 
-export function App() {
+export const App = () => {
   const [contacts, setContacts] = useState(
     JSON.parse(localStorage.getItem('contacts')) ?? []
   );
@@ -52,10 +52,6 @@ export function App() {
   };
 
   const deleteAllContact = () => {
-    if (toDelete.length === 0) {
-      return alert('Noone contact was checked');
-    }
-
     setToDelete([]);
     setContacts(prevState =>
       prevState.filter(contact => !toDelete.includes(contact.id))
@@ -88,4 +84,4 @@ export function App() {
       </div>
     </>
   );
-}
+};
