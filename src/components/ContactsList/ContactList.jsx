@@ -1,14 +1,39 @@
 import ContactsItem from 'components/ContactsItem/ContactsItem';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteContact, toDelete } from 'redux/actions';
 import s from './ContactList.module.css';
 
-const ContactLists = ({
-  onCheckboxChange,
-  deleteAllContact,
-  contactsToDelete,
-}) => {
+const ContactLists = () => {
   const contacts = useSelector(store => store.contacts.items);
+  // const contactsToDelete = useSelector(store => store.contactsToDelete);
+
+  const dispatch = useDispatch();
+
+  const handleDeleteClick = id => {
+    dispatch(deleteContact(id));
+  };
+
+  const handleCheckboxChange = e => {
+    const contactId = e.target.name;
+    dispatch(toDelete(contactId));
+  };
+
+  // const onCheckboxChange = e => {
+  //   const contactId = e.target.name;
+  //   if (toDelete.includes(contactId)) {
+  //     setToDelete(prevState => [...prevState].filter(el => el !== contactId));
+  //   } else {
+  //     setToDelete(prevState => [...prevState, e.target.name]);
+  //   }
+  // };
+
+  // const deleteAllContact = () => {
+  //   setToDelete([]);
+  //   setContacts(prevState =>
+  //     prevState.filter(contact => !toDelete.includes(contact.id))
+  //   );
+  // };
 
   return (
     <ul className={s.list}>
@@ -18,7 +43,8 @@ const ContactLists = ({
           name={name}
           number={number}
           id={id}
-          // onCheckboxChange={onCheckboxChange}
+          handleCheckboxChange={handleCheckboxChange}
+          handleDeleteClick={handleDeleteClick}
         />
       ))}
       {contacts.length !== 0 && (

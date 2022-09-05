@@ -1,19 +1,16 @@
-import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import s from './ContactsItem.module.css';
 
-import { deleteContact } from 'redux/actions';
-
-const ContactsItem = ({ name, number, id, onCheckboxChange }) => {
-  const dispatch = useDispatch();
-
-  const handleDeleteClick = id => {
-    dispatch(deleteContact(id));
-  };
-
+const ContactsItem = ({
+  name,
+  number,
+  id,
+  handleCheckboxChange,
+  handleDeleteClick,
+}) => {
   return (
     <li className={s.item}>
-      <input type="checkbox" name={id} onChange={onCheckboxChange} />
+      <input type="checkbox" name={id} onChange={handleCheckboxChange} />
       <p>
         {name}: {number}
       </p>
@@ -35,4 +32,6 @@ ContactsItem.propTypes = {
   name: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  onCheckboxChange: PropTypes.func,
+  handleDeleteClick: PropTypes.func,
 };

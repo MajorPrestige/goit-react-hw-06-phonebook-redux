@@ -1,4 +1,4 @@
-import { DELETE_CONTACT, ADD_CONTACT } from './types';
+import { DELETE_CONTACT, ADD_CONTACT, CONTACTS_TO_DELETE } from './types';
 
 const initialStore = {
   contacts: {
@@ -14,13 +14,14 @@ const initialStore = {
         number: '12312321312',
       },
     ],
+    contactsToDelete: [],
     filter: '',
   },
 };
 
 const reducer = (store = initialStore, action) => {
   const {
-    contacts: { items },
+    contacts: { items, contactsToDelete },
   } = store;
 
   switch (action.type) {
@@ -50,6 +51,18 @@ const reducer = (store = initialStore, action) => {
       store.contacts.items = contactsAfterDelete;
 
       return { ...store };
+
+    case CONTACTS_TO_DELETE:
+      if (contactsToDelete.includes(action.payload)) {
+        const filtredToDeleteContacts = contactsToDelete.filter(
+          el => el !== action.payload
+        );
+        store.contacts.contactsToDelete = filtredToDeleteContacts;
+        return { store };
+      } else {
+        const newContactsToDelete = [...contactsToDelete, action.payload];
+        return { ...store, contactsToDelete: newContactsToDelete };
+      }
 
     default:
       return store;

@@ -31,22 +31,6 @@ export const App = () => {
     dispatch(addContact(newContact));
   };
 
-  // const onCheckboxChange = e => {
-  //   const contactId = e.target.name;
-  //   if (toDelete.includes(contactId)) {
-  //     setToDelete(prevState => [...prevState].filter(el => el !== contactId));
-  //   } else {
-  //     setToDelete(prevState => [...prevState, e.target.name]);
-  //   }
-  // };
-
-  // const deleteAllContact = () => {
-  //   setToDelete([]);
-  //   setContacts(prevState =>
-  //     prevState.filter(contact => !toDelete.includes(contact.id))
-  //   );
-  // };
-
   // const filterContact = ({ target }) => {
   //   setFilter(target.value);
   // };
@@ -62,13 +46,7 @@ export const App = () => {
         <ContactsForm onSubmit={handleFormSubmit} />
         <h2>Contacts</h2>
         {/* <ContactsSearch value={filter} filter={filterContact} /> */}
-        <ContactLists
-        // contacts={filterContacts}
-        // onDeleteClick={deleteContact}
-        // onCheckboxChange={onCheckboxChange}
-        // deleteAllContact={deleteAllContact}
-        // contactsToDelete={toDelete}
-        />
+        <ContactLists />
       </div>
     </>
   );
