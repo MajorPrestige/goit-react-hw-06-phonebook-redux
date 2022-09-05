@@ -1,23 +1,6 @@
-import { createStore } from 'redux';
+import { legacy_createStore as createStore } from 'redux';
 
-const initialStore = {
-  contacts: [
-    {
-      id: '1',
-      name: 'Dan',
-      number: '123412312351',
-    },
-    {
-      id: '2',
-      name: 'Prestige',
-      number: '12312321312',
-    },
-  ],
-};
-
-const reducer = (store = initialStore) => {
-  return store;
-};
+import reducer from './reducer';
 
 const store = createStore(
   reducer,

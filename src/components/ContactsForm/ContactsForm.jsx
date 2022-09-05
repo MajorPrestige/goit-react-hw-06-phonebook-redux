@@ -10,19 +10,12 @@ function ContactsForm({ onSubmit }) {
   const inputNameId = useRef(nanoid());
   const inputNumberId = useRef(nanoid());
 
-  const onInputChange = ({ target }) => {
-    switch (target.name) {
-      case 'name':
-        setName(target.value);
-        break;
+  const handleNameChange = ({ target }) => {
+    setName(target.value);
+  };
 
-      case 'number':
-        setNumber(target.value);
-        break;
-
-      default:
-        return;
-    }
+  const handleNumberChange = ({ target }) => {
+    setNumber(target.value);
   };
 
   const onFormSubmit = e => {
@@ -48,7 +41,7 @@ function ContactsForm({ onSubmit }) {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
           value={name}
-          onChange={onInputChange}
+          onChange={handleNameChange}
           id={inputNameId}
         />
       </label>
@@ -63,7 +56,7 @@ function ContactsForm({ onSubmit }) {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
           value={number}
-          onChange={onInputChange}
+          onChange={handleNumberChange}
           id={inputNumberId}
         />
       </label>

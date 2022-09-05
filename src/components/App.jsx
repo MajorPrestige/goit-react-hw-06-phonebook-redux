@@ -1,10 +1,16 @@
 // import { useState, useEffect } from 'react';
-// import { nanoid } from 'nanoid';
-// import ContactsForm from './ContactsForm/ContactsForm';
+import { useSelector, useDispatch } from 'react-redux';
+import { nanoid } from 'nanoid';
+import { addContact } from 'redux/actions';
+import ContactsForm from './ContactsForm/ContactsForm';
 import ContactLists from './ContactsList/ContactList';
 // import ContactsSearch from './ContactsSearch/ContactsSearch';
 
 export const App = () => {
+  // eslint-disable-next-line no-unused-vars
+  const contacts = useSelector(store => store.contacts);
+  const dispatch = useDispatch();
+
   // const [contacts, setContacts] = useState(
   //   JSON.parse(localStorage.getItem('contacts')) ?? []
   // );
@@ -15,26 +21,15 @@ export const App = () => {
   //   localStorage.setItem('contacts', JSON.stringify(contacts));
   // }, [contacts]);
 
-  // const formSubmitHandler = (name, number) => {
-  //   const newContact = {
-  //     id: nanoid(),
-  //     name,
-  //     number,
-  //   };
+  const handleFormSubmit = (name, number) => {
+    const newContact = {
+      id: nanoid(),
+      name,
+      number,
+    };
 
-  //   setContacts(contacts => {
-  //     const duplicateContact = contacts.find(
-  //       contact => contact.name === newContact.name
-  //     );
-
-  //     if (duplicateContact?.name === newContact.name) {
-  //       alert(`${newContact.name} is already in contacts`);
-  //       return [...contacts];
-  //     }
-
-  //     return [newContact, ...contacts];
-  //   });
-  // };
+    dispatch(addContact(newContact));
+  };
 
   // const onCheckboxChange = e => {
   //   const contactId = e.target.name;
@@ -43,12 +38,6 @@ export const App = () => {
   //   } else {
   //     setToDelete(prevState => [...prevState, e.target.name]);
   //   }
-  // };
-
-  // const deleteContact = contactId => {
-  //   setContacts(prevState =>
-  //     prevState.filter(contact => contact.id !== contactId)
-  //   );
   // };
 
   // const deleteAllContact = () => {
@@ -70,7 +59,7 @@ export const App = () => {
     <>
       <div>
         <h2>Phonebook</h2>
-        {/* <ContactsForm onSubmit={formSubmitHandler} /> */}
+        <ContactsForm onSubmit={handleFormSubmit} />
         <h2>Contacts</h2>
         {/* <ContactsSearch value={filter} filter={filterContact} /> */}
         <ContactLists
