@@ -1,14 +1,18 @@
 import { useState, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 import s from './ContactsForm.module.css';
+import { addContact } from 'redux/actions';
 
-function ContactsForm({ onSubmit }) {
+function ContactsForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const inputNameId = useRef(nanoid());
   const inputNumberId = useRef(nanoid());
+
+  const dispatch = useDispatch();
 
   const handleNameChange = ({ target }) => {
     setName(target.value);
@@ -18,9 +22,16 @@ function ContactsForm({ onSubmit }) {
     setNumber(target.value);
   };
 
-  const onFormSubmit = e => {
+  const handleFormSubmit = e => {
     e.preventDefault();
-    onSubmit(name, number);
+
+    const newContact = {
+      id: nanoid(),
+      name,
+      number,
+    };
+
+    dispatch(addContact(newContact));
     reset();
   };
 
@@ -30,7 +41,7 @@ function ContactsForm({ onSubmit }) {
   };
 
   return (
-    <form className={s.form} onSubmit={onFormSubmit}>
+    <form className={s.form} onSubmit={handleFormSubmit}>
       <label className={s.label} htmlFor={inputNameId}>
         Name
         <input

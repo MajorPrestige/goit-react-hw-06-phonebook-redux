@@ -1,4 +1,10 @@
-import { DELETE_CONTACT, ADD_CONTACT, CONTACTS_TO_DELETE } from './types';
+import {
+  DELETE_CONTACT,
+  ADD_CONTACT,
+  CONTACTS_TO_DELETE,
+  DELETE_ALL_CONTACTS,
+  FILTER_CONTACTS,
+} from './types';
 
 const initialStore = {
   contacts: {
@@ -58,13 +64,29 @@ const reducer = (store = initialStore, action) => {
           el => el !== action.payload
         );
         store.contacts.contactsToDelete = filtredToDeleteContacts;
-        return { store };
-      } else {
-        const newContactsToDelete = [...contactsToDelete, action.payload];
-        store.contacts.contactsToDelete = newContactsToDelete;
         return { ...store };
       }
 
+      const newContactsToDelete = [...contactsToDelete, action.payload];
+      store.contacts.contactsToDelete = newContactsToDelete;
+      return { ...store };
+
+    case DELETE_ALL_CONTACTS:
+      const contactsAfterDeleteChecked = items.filter(
+        el => !contactsToDelete.includes(el.id)
+      );
+      store.contacts.items = contactsAfterDeleteChecked;
+      store.contacts.contactsToDelete = [];
+      return { ...store };
+
+    case FILTER_CONTACTS:
+      store.contacts.filter = action.payload;
+      const filterNormalized = action.payload.toLowerCase();
+      const filteredContacts = store.contacts.items.filter(el =>
+        el.name.includes(filterNormalized)
+      );
+      store.contacts.items = filteredContacts;
+      return { ...store };
     default:
       return store;
   }
