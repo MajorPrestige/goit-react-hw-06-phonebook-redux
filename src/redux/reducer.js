@@ -61,7 +61,8 @@ const reducer = (store = initialStore, action) => {
         return { store };
       } else {
         const newContactsToDelete = [...contactsToDelete, action.payload];
-        return { ...store, contactsToDelete: newContactsToDelete };
+        store.contacts.contactsToDelete = newContactsToDelete;
+        return { ...store };
       }
 
     default:
