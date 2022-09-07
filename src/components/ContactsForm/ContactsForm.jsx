@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 import s from './ContactsForm.module.css';
-import { addContact } from 'redux/actions';
+import { addContact } from 'redux/items/actions';
 
 function ContactsForm() {
   const [name, setName] = useState('');

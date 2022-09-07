@@ -1,6 +1,10 @@
 import ContactsItem from 'components/ContactsItem/ContactsItem';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact, toDelete, deleteCheckedContacts } from 'redux/actions';
+import {
+  deleteContact,
+  toDelete,
+  deleteCheckedContacts,
+} from 'redux/items/actions';
 import s from './ContactList.module.css';
 
 const ContactLists = () => {
